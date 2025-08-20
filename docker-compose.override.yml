@@ -1,0 +1,39 @@
+services:
+  wait-for-indexers:
+    image: alpine:3.19
+    command: >
+      sh -lc '
+      set -e;
+      apk add --no-cache netcat-openbsd >/dev/null 2>&1 || true;
+      for host in wazuh1.indexer wazuh2.indexer wazuh3.indexer; do
+        echo "[wait-for-indexers] waiting for $$host:9200...";
+        until nc -z -w 3 $$host 9200; do sleep 3; done;
+        echo "[wait-for-indexers] $$host:9200 is up.";
+      done;
+      echo "[wait-for-indexers] all indexers are up.";
+      '
+    networks: [ SOC_NET ]
+    restart: "no"
+
+  wait-for-master:
+    image: alpine:3.19
+    command: >
+      sh -lc '
+      set -e;
+      apk add --no-cache netcat-openbsd >/dev/null 2>&1 || true;
+      echo "[wait-for-master] waiting for wazuh.master:55000...";
+      until nc -z -w 3 wazuh.master 55000; do sleep 3; done;
+      echo "[wait-for-master] wazuh.master:55000 is up.";
+      '
+    networks: [ SOC_NET ]
+    restart: "no"
+
+  wazuh.master:
+    depends_on:
+      wait-for-indexers:
+        condition: service_completed_successfully
+
+  wazuh.dashboard:
+    depends_on:
+      wait-for-master:
+        condition: service_completed_successfully
