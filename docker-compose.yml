@@ -314,7 +314,7 @@ services:
     networks: #i added this
       - SOC_NET
   
-  # HAProxy front for the indexer cluster (official repo uses a front to expose cluster)
+  # HAProxy
   wazuh.indexer:
     image: haproxy:2.6
     container_name: wazuh.indexer
