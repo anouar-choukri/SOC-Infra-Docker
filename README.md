@@ -12,7 +12,13 @@ The instructions below reproduce the sequence of shell commands you followed —
 
 ## Prerequisites
 
-* Docker & Docker Compose installed (compatible versions). Verify with:
+* Docker & Docker Compose installed (compatible versions).
+  
+For Docker installation, follow Steps 1 & 2: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+For Docker Compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+
+* Verify with:
 
 ```bash
 docker --version
