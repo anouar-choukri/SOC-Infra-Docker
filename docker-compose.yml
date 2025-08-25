@@ -119,7 +119,7 @@ services:
       - "0.0.0.0:8080:80" # map to host 8080 to avoid conflict on port 80
       - "0.0.0.0:8444:443" # map to host 8443 for HTTPS
     environment:
-      - "HOSTNAME=https://localhost"
+      - "BASEURL=https://localhost:8444"
       - "REDIS_FQDN=redis"
       - "INIT=true"
       - "CRON_USER_ID=1"
