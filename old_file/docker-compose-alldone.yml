@@ -129,7 +129,7 @@ services:
       - "0.0.0.0:8080:80"
       - "0.0.0.0:8444:443"
     environment:
-      - "BASEURL=https://172.86.117.45:8444"
+      - "BASEURL=https://<ur-host-IP>:8444"
       - "REDIS_FQDN=redis"
       - "INIT=true"
       - "CRON_USER_ID=1"
